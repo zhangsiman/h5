@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/swiper-3.3.1.min.css">
+<style>
+html,body{
+height: 100%;
+  margin: 0;
+  padding: 0;
+}
+body{
+  background: #000;
+  color:#000;
+}
+  .swiper-container{
+      height: 400px;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+
+  }
+    .swiper-container img{
+        width: 100%;
+        display: block;
+
+    }
+  .swiper-container1{
+    width: 100%;
+    background-color: rgba(0, 0, 0, 1);
+  }
+  .swiper-container1 .swiper-slide{
+    width: 25%;
+    opacity: 0.5;
+  }
+  .swiper-container1 .swiper-slide-active{
+    opacity: 1
+  }
+  .swiper-container1 img{
+    width: 100%;
+  }
+  </style>
+</head>
+<body>
+  <script src="./js/swiper-3.3.1.min.js"></script>
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="./img/bg1.jpg" alt=""  /></div>
+      <div class="swiper-slide"><img src="./img/bg2.jpg" alt=""  /></div>
+      <div class="swiper-slide"><img src="./img/bg3.jpg" alt="" /></div>
+      <div class="swiper-slide"><img src="./img/bg4.jpg" alt="" /></div>
+
+    </div>
+    </div>
+
+    <div class="swiper-container1">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="./img/bg1.jpg" alt="" width="800" height="100"/></div>
+        <div class="swiper-slide"><img src="./img/bg2.jpg" alt="" width="800" height="100"/></div>
+        <div class="swiper-slide"><img src="./img/bg3.jpg" alt="" width="800" height="100"/></div>
+        <div class="swiper-slide"><img src="./img/bg4.jpg" alt="" width="800" height="100"/></div>
+      </div>
+  </div>
+  <script>
+  window.onload=function(){
+    var mySwiper = new Swiper('.swiper-container', {
+    	autoplay: 1000,
+      autoplayDisableOnInteraction : false,
+
+    })
+    var mySwiper1 = new Swiper('.swiper-container1', {
+        slidesPerView : 'auto',
+        spaceBetween : 20,
+        centeredSlides : true,
+    })
+    mySwiper.params.control = mySwiper1;
+    mySwiper1.params.control = mySwiper;
+  }
+
+  </script>
+</body>
+</html>

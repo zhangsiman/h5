@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="canvas"  style="border:1px solid #000">
+    您的浏览器不支持
+  </canvas>
+  <script type="text/javascript">
+    window.onload = function () {
+      var wWidth = window.innerWidth;
+      var wHeight = window.innerHeight;
+      var can = document.getElementById('canvas');
+      can.width = wWidth/2;
+      can.height = wHeight/2;
+      var cxt = can.getContext('2d')
+    //画圆
+      // cxt.beginPath()
+      // cxt.arc(95,50,40,0,2*Math.PI);
+
+    //字体
+      // cxt.font="30px Arial";
+      // cxt.fillText("Hello World",10,50);
+      // cxt.strokeText("Hello World",10,100);
+
+    //三角形
+     cxt.beginPath()
+     cxt.moveTo(100,100);
+     cxt.lineTo(300,200);
+     cxt.lineTo(300,250);
+     cxt.lineTo(100,100);
+     cxt.fillStyle = 'red';//设置样式
+     cxt.fill();//填充
+      cxt.closePath()
+      cxt.stroke()
+    }
+  </script>
+</body>
+</html>

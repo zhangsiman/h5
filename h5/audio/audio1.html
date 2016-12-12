@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>自动切换歌曲</title>
+  <style>
+      .bar{
+        width: 250px;
+        height: 12px;
+        background: teal;
+        border-radius: 6px;
+      }
+      #progress{
+        width: 0%;
+        height: 12px;
+        background: red;
+        border-radius: 6px;
+      }
+
+  </style>
+</head>
+<body>
+  <script src="js/jquery-1.10.1.min.js"></script>
+
+  <ul id="list"></ul>
+  <audio autoplay id="audio">
+
+  <source src="./audio/Save.mp3" type="audio/mpeg" id="source"/>
+  您的浏览器不支持 audio 元素。
+</audio>
+<div class="bar">
+  <div id="progress"></div>
+</div>
+<!-- <progress value="20" max="100">
+</progress> -->
+<button type="button" id="play">播放</button>
+<button type="button" id="pause">暂停</button>
+<button type="button" id="muted">静音</button><br/>
+<button type="button" id="pre">上一首</button>
+<span id="nowPlayname"></span>
+<button type="button" id="next">下一首</button>
+
+<script type="text/javascript">
+  window.onload = function () {
+    var audio = document.getElementById("audio");
+    var playBtn = document.getElementById("play");
+    var pauseBtn = document.getElementById("pause");
+    var mutedBtn = document.getElementById("muted");
+    var preBtn = document.getElementById("pre");
+    var nextBtn = document.getElementById("next");
+    var nowPlayname = document.getElementById("nowPlayname");
+    var  progress = document.getElementById("progress");
+    //播放
+    playBtn.onclick =　function () {
+      audio.play()
+    }
+    //暂停
+    pauseBtn.onclick =　function () {
+      audio.pause()
+    }
+    //静音
+    mutedBtn.onclick =　function () {
+
+        audio.muted =! audio.muted
+    }
+    var music = ["./audio/Save.mp3","./audio/Fade.mp3"];
+    var nowPlay = 0;//当前播放为０,作为下标
+
+    //上下首切换
+    nextBtn.onclick = function () {
+      selectMusic(1)
+    }
+    preBtn.onclick = function () {
+      selectMusic(-1)//方法二：用函数的方法
+    }
+    function selectMusic(num) {
+      nowPlay = nowPlay +num;
+      console.log(nowPlay);
+      if (nowPlay>=music.length) {
+        nowPlay = 0;//判断nowPlay大于了歌单长度，返回到０再循环
+      }
+      if (nowPlay<0) {
+        nowPlay = music.length-1;
+      }
+      source.src = music[nowPlay]
+
+      audio.load();
+      var part = music[nowPlay].split('/')[2];
+      //用split 或者用slice 分割提取歌名片段
+      var palyName = part.split('.')[0];
+      nowPlayname.innerHTML  = palyName;
+    }
+      selectMusic(1)
+
+      //进度条监听事件
+      //ontimeupdateNew	script	当媒介改变其播放位置时运行脚本
+      audio.ontimeupdate = function () {
+          var nowTime = audio.currentTime;//当前时间
+          var fullTime = audio.duration;//持续时间
+          var width = nowTime/fullTime;
+          progress.style.width = width*100 +'%';//给设置样式
+      }
+      //自动播放下一曲
+
+      //生成歌曲列表
+      for (var i = 0; i < music.length; i++) {
+        var musicFullName = music[i].split('/')[2];
+        var musicName = musicFullName.split('.')[0];
+        console.log(musicName);
+        var list  = '<li>'+musicName+'</li>';
+        $('#list').append(list)
+      }
+
+      //点击歌名播放
+      $('#list').click(function (e) {
+        var $dom = $(e.target);
+        var musicIndex = $dom.index();
+        var change = musicIndex - nowPlay;
+        selectMusic(change)
+      })
+  }
+</script>
+</body>
+</html>

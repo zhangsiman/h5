@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style >
+    #canvas{
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" style="border:'1px solid #000'">
+    不支持
+  </canvas>
+  <script type="text/javascript">
+  var canvas = document.getElementById('canvas');
+  var cxt = canvas.getContext("2d");
+
+
+  canvas.width = 800;
+  canvas.height = 500;
+  cxt.strokeStyle = "teal";
+  cxt.lineCap = "round";//两头为圆形
+  cxt.lineWidth = 5; //线的宽度
+  cxt.translate(400,250);//改变中心
+  var num = 1;
+  
+  setInterval(function () {
+    num++;
+    if (num>360) {
+      num = 0;
+    }
+    cxt.clearRect(-400,-250,400,250);//清空一块
+    cxt.beginPath()
+    cxt.rotate(num*Math.PI/180)
+    cxt.moveTo(50,0);
+    cxt.lineTo(100,0);
+    cxt.stroke();
+    cxt.closePath();
+
+  },50)
+  </script>
+</body>
+</html>

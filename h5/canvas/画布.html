@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style media="screen">
+    #canvas{
+      margin: 0 auto;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <input type="text" name="name" value="" id="width">
+  <button type="button" id="btn">修改笔触</button>
+  <button type="button" id="clear">清除</button>
+  <canvas id="myCanvas" style="border:1px solid #000000;">
+您的浏览器不支持 HTML5 canvas 标签。
+</canvas>
+<script type="text/javascript">
+   var canvas = document.getElementById('myCanvas');
+   var btn = document.getElementById('btn');
+   var width = document.getElementById('width');
+    var clear = document.getElementById('clear');
+    var cxt = canvas.getContext('2d');
+    canvas.width = 800;
+    canvas.height = 500;
+    cxt.lineWidth = 5; //线的宽度
+    btn.onclick = function () {
+    var penWidth = parseInt(width.value)
+        cxt.lineWidth =  penWidth
+  }
+  clear.onclick = function () {
+    cxt.clearRect(0,0,800,500);
+}
+    var arr=['red','pink','teal','deepskyblue'];
+
+    function move(e) {
+      cxt.lineTo(e.offsetX,e.offsetY);
+      cxt.stroke();
+
+    }
+    canvas.addEventListener('mousedown',function (e) {
+      cxt.beginPath()
+      cxt.moveTo(e.offsetX,e.offsetY);
+      canvas.addEventListener('mousemove',move)
+    })
+    canvas.addEventListener('mouseup',function (e) {
+      cxt.strokeStyle = arr[parseInt(Math.random()*5)]
+
+      canvas.removeEventListener('mousemove',move)
+      console.log('up');
+      cxt.closePath()
+    })
+</script>
+</body>
+</html>

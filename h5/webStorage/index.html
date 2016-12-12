@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <p id="time"></p>
+  <p id="content"></p>
+  <p id="pagecount"></p>
+
+  <script type="text/javascript">
+  window.onload = function(){
+    // localStorage.lastname="Smith";
+    // localStorage.firstname="lili";
+    // localStorage.againname="Mary";
+    // localStorage.setItem('name','xixilide')
+    // localStorage.setItem('age','12')
+
+    // console.log(localStorage.length); //2
+    // console.log(localStorage.name);
+    // localStorage.clear()
+    // localStorage.habby="hao"
+    // localStorage.removeItem('habby')
+
+    // sessionStorage.setItem('name','jiangrong')
+    // sessionStorage.setItem('where','shijiazhuang')
+    // console.log(sessionStorage.where);
+    // alert(localStorage.key(0)+'\n'+localStorage.key(1)+'\n'+localStorage.key(2))
+    // console.log(sessionStorage.key(0)+sessionStorage.key());
+    localStorage.removeItem('time')
+    if (localStorage.time === undefined) {
+      document.getElementById("time").innerHTML = "第一次访问"
+      localStorage.time = new Date() //localStorage创建　有自己方法获取时间
+
+    }else {
+      document.getElementById("time").innerHTML = "上次访问时间"+ localStorage.time
+      localStorage.time = new Date() //localStorage创建本次的访问时间　
+
+    }
+    localStorage.time = new Date() //localStorage　有自己方法获取时间
+    document.getElementById("time").innerHTML = "上次访问时间"+ localStorage.time
+
+  // 　查询打开过浏览器的次数查询　：
+    if (localStorage.num === undefined) {
+       localStorage.num = 0;
+    }
+    localStorage.num = Number(localStorage.num) +1;//parseInt转换为整数
+    document.getElementById("content").innerHTML = "你一共查看过"+ localStorage.num +"次"
+  // 用户访问页面的次数
+  if (localStorage.pagecount)
+    {
+    localStorage.pagecount=Number(localStorage.pagecount) +1;
+    }
+  else
+    {
+    localStorage.pagecount=1;
+    }
+  document.getElementById("pagecount").innerHTML="Visits "+ localStorage.pagecount + " time(s).";
+  }
+  </script>
+
+</body>
+</html>

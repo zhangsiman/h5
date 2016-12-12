@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style media="screen">
+  #box{
+    width:100px;
+    height:100px;
+    background-color:blue;
+  }
+  </style>
+
+</head>
+<body>
+  <div id="box"></div>
+  <script type="text/javascript">
+    //方法一：　
+    // function IsPC(){
+    //   var userAgentInfo = navigater.userAgent;
+    //   var Agents = new Array("Androd","iphone","SymbianOS","windows Phone","iPad")
+    //   var PC = true;
+    //   for (var i = 0; i < Agents.length; i++) {
+    //   if (userAgentInfo.indexOf(Agents[v])>0) {
+    //     PC = false;break;
+    //   }
+    //   return PC;
+    //   }
+    // }
+    // if (IsPC) {
+    //   alert('这是电脑')
+    // }else {
+    //   alert('移动端')
+    // }
+
+    //方法二：
+    // function page() {
+    //     if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
+    //     //移动端
+    //     }
+    //     else {
+    //     //PC端
+    //     }
+    // page();
+
+
+//方法三：自动检测pc端和移动端
+      if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
+        PC  = false;
+      }else {
+        PC = true;
+        console.log(PC);
+      }
+      if (PC) {
+        myTouchStart = 'mousedown';
+        myTouchEnd = 'mouseup';
+        myTouchMove = 'mousemove'
+      }else {
+        myTouchStart = 'touchstart';
+        myTouchEnd = 'touchend';
+        myTouchMove = 'touchmove';
+
+      }
+      document.getElementById('box').addEventListener(myTouchStart,function(e){
+        console.log(e.type);
+      })
+      document.getElementById('box').addEventListener(myTouchEnd,function(e){
+        console.log(e.type);
+      })
+      document.getElementById('box').addEventListener(myTouchMove,function(e){
+        console.log(e.type);
+      })
+  </script>
+</body>
+</html>

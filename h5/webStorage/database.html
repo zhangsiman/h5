@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <label>姓名：</label><input type="text" id="user_name"><br/>
+  <label>Email：</label><input type="text" id="email"><br/>
+  <label>电话：</label><input type="text" id="phone"><br/>
+  <label>地址：</label><input type="text" id="address"><br/>
+  <button id="save">save</button><br/>
+  <input type="text" name="search" id="search">
+  <button id="search_btn">搜索</button><br/><hr>
+    <p id="box"></p><hr>
+  <script>
+    var user_name = document.getElementById('user_name')
+    var email = document.getElementById('email')
+    var phone = document.getElementById('phone')
+    var address = document.getElementById('address')
+    var save = document.getElementById('save')
+    var search = document.getElementById('search')
+    var box = document.getElementById('box')
+    var search_btn=document.getElementById('search_btn')
+
+
+    function saveData() {
+      var data = {}
+      data.user_name=user_name.value;
+      data.email=email.value;
+      data.phone=phone.value;
+      data.address=address.value;
+
+      var datajson  = JSON.stringify(data)　　//stringify将对象转换成字符串
+      localStorage.setItem(data.user_name,datajson)
+    }
+    function searchdata() {
+      var text = search.value;
+      // for (var i = 0; i < localStorage.length; i++) {
+      //   if (text==localStorage.key(i)) {
+      //     var result = localStorage.key(i)
+      //     console.log(localStorage.getItem(result));
+      //   }
+      // }
+      if (localStorage.getItem(text)===null) {
+        console.log("没有该用户")
+      }else{
+        var json1=JSON.parse(localStorage.getItem(text))
+        box.innerHTML="姓名为："+json1.user_name+'<br/>'+"电话："+json1.phone+'<br/>'
+                        +"邮箱："+json1.email+'<br/>'+"地址："+json1.address
+      }
+    }
+    save.onclick=function () {
+      console.log("save");
+      saveData()
+    }
+    // search.oninput=function(){  //用于实时输出的
+
+    // }
+    search_btn.onclick=function () {
+      console.log("search");
+      searchdata()
+    }
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  #box{
+    width: 150px;
+    height: 150px;
+    background-color: pink;
+    position: absolute;
+  }
+  </style>
+</head>
+<body>
+
+  <div id="box"></div>
+  <script>
+//touch 事件例子
+  // document.getElementById("box").addEventListener('touchstart',function(){
+  //   console.log("start");
+  // })
+  // document.getElementById("box").addEventListener('touchmove',function(){
+  //   alert(event.touches.length)//识别几个手指触摸
+  //   console.log("连续触发");
+  // })
+  // document.getElementById("box").addEventListener('touchend',function(){
+  //   console.log("触摸离开");
+  // })
+
+
+// window.onload=function () {
+//   var box = document.getElementById('box')
+//   var posX=0,posY=0;//定义默认值，避免出错
+//   box.addEventListener('touchstart',function (e){
+//     var boxLeft = box.offsetLeft;
+//     var boxTop = box.offsetTop;
+//     var touchLeft = e.touches[0].pageX;
+//     var touchTop = e.touches[0].pageY;
+//     posX = touchLeft -boxLeft;
+//     posY = touchTop-boxTop;
+//   })
+//   box.addEventListener('touchmove',function (e) {
+//     // e.preventDefault();
+//     box.style.left = e.touches[0].pageX-posX+'px';
+//     box.style.top = e.touches[0].pageY-posY+'px';
+//
+//     console.log(e.touches[0].pageX);
+//   })
+// }
+
+
+ var box = document.getElementById('box')
+ var startX,result;
+box.addEventListener('touchstart',function(e){
+  startX = e.touches[0].pageX
+  // startY = e.touches[0].pageY
+
+})
+
+box.addEventListener('touchmove',function(e){
+  endX  = e.touches[0].pageX;
+  // endY  = e.touches[0].pageY;
+  return result = endX - startX;
+
+})
+box.addEventListener('touchend',function(e){
+if (result>0) {
+  alert('右')
+}else {
+  alert('左')
+}
+})
+  </script>
+</body>
+</html>
